@@ -11,7 +11,6 @@ import java.util.Map;
 import static org.springframework.http.ResponseEntity.status;
 
 @RestController
-@RequestMapping
 public class App {
 
     @GetMapping(value = "/", produces = "application/json")
@@ -27,10 +26,10 @@ public class App {
         return ResponseEntity.status(302).header("Location", apiDocsUrl).build();
     }
 
-    @GetMapping(value = "/**", produces = "application/json")
+    @RequestMapping(value = "/**", produces = "application/json")
     public ResponseEntity<Map<String, String>> notFound() {
         Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", "Not Found");
+        errorResponse.put("error", "Route not Found");
         return status(404).body(errorResponse);
     }
 
